@@ -1,11 +1,13 @@
 # POD
 >
-> kubernetes에서 POD란 무엇이고 어떤 방식으로 사용해야하는지에 대해 알아봤습니다.
+> kubernetes에서 POD란 무엇이고 어떤 방식으로 사용해야하는지에 대해 정리해봤습니다.
 >
 
 ## POD란
 >
 > kubernetes에서, process를 관리하는 최소단위입니다.
+>
+> 실제 application이 실행되는 container를 POD라는 단위로 묶어서 관리하게 됩니다.
 >
 > POD가 생성될 때 cluster 내부의 CNI에서 요구하는 CIDR 대역폭의 unique한 private ip를 동적으로 할당받습니다.
 >
@@ -17,6 +19,7 @@
 >
 > 그래서 하나의 POD에 여러 container가 실행되려면, 각기 다른 port를 사용해야합니다.
 >
+> 기본적으로 모든 traffic을 허용하기 때문에 cluster내부에서 NAT없이 다른 POD와 통신이 가능합니다.
 >
 
 ## Details of POD
@@ -69,7 +72,6 @@
 
 ### POD : Ephemeral resource 
 >
->
 > 하지만, POD는 다양한 이유로 삭제되거나 재실행되기 때문에 cluster 내에서 ephemeral, 즉 임시 resource입니다. ( ephemeral의 반대 표현은 durable입니다. )
 >
 > 실행중인 POD가 삭제 혹은 재실행 되는 이유는 아래와 같습니다.
@@ -88,8 +90,21 @@
 >
 > ( volume, service...)
 >
-> 또한 POD 삭제로 인한 solution 중단 사태를 막기 위한 architecture도 고려해야합니다.
+
+### The architecture of application
 >
-
-
+> 기존의 코딩 방식은 여러 function을 작성한 뒤, parameter passing방식으로 전체 process를 진행했습니다.
+> 
+> 이는 전체 function이 memory를 공유하는 구조에서 이루어집니다.
+>
+> 이런 방식으로 container image를 만드는 경우 하나의 container에서 모든 application의 기능을 담당해야합니다.
+>
+> container.md에서 언급했듯 container에 여러 process가 포함되면 해당 container의 상태를 알기 어려워 관리가 힘들어집니다.
+> 
+> 그래서, application을 설계할 때 container image를 function단위로 만든 뒤, network를 통해 parameter를 넘겨주는 MSA 방식으로 구현해야합니다.
+>
+> 이때 POD를 VM처럼 생각하여 방금 설계한 모든 container를 실행하면, POD가 삭제되거나 재실행될 때 전체 service down time이 발생합니다. 
+>
+> 그래서 이와 같은 architecture는 바람직하지 않고 하나의 POD에 하나의 function을 담당하는 container를 실행시키는 것이 적절합니다.
+>
 
