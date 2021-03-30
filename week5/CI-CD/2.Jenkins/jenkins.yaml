@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: jenkins
+  labels:
+    app: jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: jenkins-container
+          image: jenkins/jenkins
+          volumeMounts:
+          - name: jenkins-volume
+            mountPath: /var/jenkins_home
+          ports:
+          - containerPort: 8080
+          - containerPort: 50000
+      volumes:
+        - name: jenkins-volume
+          hostPath:
+            path: /etc/jenkins
+      nodeSelector:
+        kubernetes.io/hostname: worker1

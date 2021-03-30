@@ -5,7 +5,7 @@
 개발환경과 연동할 gitlab server를 gitlab image를 통해 구축하겠습니다.
 
 ``` bash
-cd week5/CI-CD/gitlab
+cd week5/CI-CD/1.gitlab
 kubectl apply -f gitlab.yaml
 ```
 소스코드를 보며 분석해보겠습니다.
