@@ -13,7 +13,7 @@
 > 위와 같은 출력이 나오면, 성공적으로 POD를 실행한 것 입니다.
 >
 > 해당 POD에 직접 접근해보겠습니다.
-```
+``` bash
  kubectl exec -it $(kubectl get pod | grep -i pod1 | awk '{ print $1 }' ) -- bash
  
  curl localhost:3000
@@ -31,13 +31,13 @@
 > 이 경우, POD는 172.17.0.3의 ip를 가지고 있습니다.
 >
 > 이 ip를 통해 접근을 해보겠습니다.
-``` 
+```  bash
  curl $(kubectl get pod -o wide | grep -i pod1 | awk '{ print $6 }'):3000
 ``` 
 > <img src="/images/19.JPG">
 >
 > 이 pod를 삭제 후 다시 실행시켜보겠습니다.
-```
+``` bash
  kubectl delete pod $(kubectl get pod | grep -i pod1 | awk '{ print $1}')
  
  kubectl get pod -o wide
@@ -59,7 +59,7 @@
 > <img src="/images/22.jpg">
 > 
 > 다음 명령어를 실행하시면, 좀 전에 생성한 POD와 연결되는 service가 만들어집니다.
-``` 
+```  bash
  kubectl apply -f ./service.yaml
 
  kubectl get service -o wide
@@ -69,7 +69,7 @@
 > 접근하고자 하는 service의 ip는 10.96.9.106입니다. 이는 POD가 새로 생성되어도 그대로 유지됩니다.
 > 
 > 다음을 입력하면, service를 통해 방금 생성한 POD로 접근할 수 있습니다.
-``` 
+```  bash
  curl $(kubectl get service -o wide | grep -i pod1 | awk '{ print $3 }'):3000
 ``` 
 > <img src="/images/24.JPG">
@@ -77,7 +77,7 @@
 > service의 형태는 다양한데, 이번에 생성한 Nodeport의 경우, 외부에서 node의 ip와 30001번 port 통해서도 접근이 가능합니다.
 > 
 > 현재 node의 ip는 ifconfig를 통해 알 수 있습니다.
-``` 
+```  bash
  ifconfig | grep "inet "
 ``` 
 > <img src="/images/25.JPG">

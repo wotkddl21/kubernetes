@@ -36,17 +36,17 @@
 > 이후 과정은 root 계정으로 진행하는 것이 좋습니다.
 >
 > // root 계정 초기 비밀번호 설정
-``` 
+```  bash
  sudo passwd root
 ```
 > 
 > //root계정으로 전환
-``` 
+```  bash
  su
 ``` 
 > 
 > // git 설치
-``` 
+```  bash
  apt-get install git -y
  
  git clone https://github.com/jymun/syds-paas1.git
@@ -54,11 +54,11 @@
  cd ./syds-paas1/week3
 ``` 
 > // install.sh에 실행권한 부여
-``` 
+```  bash
  chmod +x install.sh
 ``` 
 > //minikube 설치 시작
-``` 
+```  bash
  ./install.sh
 ``` 
 >
@@ -67,13 +67,13 @@
 > 위와 같은 출력이 나온다면 minikube와 그에 필요한 것들을 성공적으로 설치한 것입니다.
 >
 > 이제, kubectl을 설치해야합니다.
-``` 
+```  bash
  curl -LO "https://storage.googleapis.com/kubernetes-release/release/" 원하는 버전 "/bin/linux/amd64/kubectl"
 
  ex) curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/linux/amd64/kubectl"
 ``` 
 > kubectl binary를 download했다면, 실행권한을 주고 어느 위치에서나 사용할 수 있도록 /usr/local/bin의 위치로 옮겨야합니다.
-``` 
+```  bash
  chmod +x ./kubectl
 
  mv ./kubectl /usr/local/bin/kubectl
@@ -89,10 +89,10 @@
 > 이제 kubernetes cluster를 v1.17.0으로 구성해보겠습니다.
 > 
 > 버전은 자유롭게 선택하시되, 앞서 설치한 kubectl과 동일하게 하시면 됩니다.
-``` 
+```  bash
  minikube start --driver=none --kubernetes-version=v1.17.0
 ``` 
-``` 
+```  bash
  kubectl get node
 ``` 
 > <img src="/images/minikube/16.JPG" >

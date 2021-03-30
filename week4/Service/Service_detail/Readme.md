@@ -12,7 +12,7 @@
 >
 > > ### 1. Selector
 > >
-```
+``` bash
 cd week4/Service/Service_detail
 kubectl apply -f ./pod_service.yaml
 
@@ -28,12 +28,12 @@ kubectl apply -f ./pod_service.yaml
 > > 현재 아무 POD도 실행하지 않았으므로 Endpoints: <none>인 모습입니다.
 > >
 > > app=webpod인 POD를 배포해보겠습니다.
-```
+``` bash
 kubectl apply -f ./pod.yaml
 ```
 > >
 > > 현재 POD가 Running 상태이고 IP는 10.244.1.5입니다.
-```
+``` bash
 kubectl get pod -o wide
 ```
 
@@ -43,7 +43,7 @@ kubectl get pod -o wide
 > > service의 Endpoints도 다시 확인해보겠습니다.
 > >
 
-```
+``` bash
 kubectl describe service my-service
 ```
 
@@ -54,7 +54,7 @@ kubectl describe service my-service
 > >
 > > 우연일 수도 있으니, POD를 삭제한 뒤 다시 실행시켜보겠습니다.
 > >
-```
+``` bash
 kubectl delete pod webpod && kubectl apply -f ./pod.yaml
 ```
 
@@ -65,7 +65,7 @@ kubectl delete pod webpod && kubectl apply -f ./pod.yaml
 > >
 > > my-service의 Endpoints를 다시 확인해보겠습니다.
 > >
-```
+``` bash
 kubectl describe service my-service
 ```
 
@@ -88,7 +88,7 @@ kubectl describe service my-service
 > > mongodb를 사용한 dbpod의 service형식을 알고 있기 때문에 default dns로 연결을 시도하는 것이 현명한 방법입니다.
 > >
 > > 우선 mongodb pod를 실행해보겠습니다.
-```
+``` bash
 kubectl apply -f mongo-pv.yaml
 kubectl apply -f mongo.yaml
 ```
@@ -100,7 +100,7 @@ kubectl apply -f mongo.yaml
 > >
 > > webpod에서 mongodb pod로 연결을 성공했는지 확인해보겠습니다.
 > >
-```
+``` bash
 kubectl exec -it webpod -- curl localhost:3000/connect
 kubectl logs webpod
 ```
@@ -133,7 +133,7 @@ kubectl logs webpod
 > >
 > > 예제를 실행해보겠습니다. 이전에 실행한 webpod를 외부로 노출시켜보겠습니다.
 > >
-```
+``` bash
 kubectl apply -f ./nodeport.yaml
 kubect describe service nodeport-service
 ```
@@ -144,7 +144,7 @@ kubect describe service nodeport-service
 > >
 > > 이제 외부에서 nodeip:30080으로 접속을 시도해보겠습니다.
 > >
-```
+``` bash
 ifconfig
 ```
 <img src="/images/Service/service10.JPG">
@@ -160,7 +160,8 @@ ifconfig
 > >
 > > 이번엔 worker node의 ip를 확인해보겠습니다.
 > >
-```
+``` bash
+// worker node에서 진행
 ifconfig
 ```
 

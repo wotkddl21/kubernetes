@@ -4,8 +4,8 @@
 
 container의 /temp로 host node의 /etc/opt volume을 mount했습니다.
 
-```
-cd week4/Volume/hostpath
+``` bash
+cd week4/Volume/2.hostpath
 kubectl apply -f POD1.yml
 ```
 
@@ -17,7 +17,7 @@ localhost:30040으로 접속을 시도해보겠습니다.
 
 이제 /temp 위치에 새로운 html 파일을 생성해보겠습니다.
 
-```
+``` bash
 kubectl exec -it hostpath-test -- bash
 echo "Data before the deleting POD" > /temp/index.html
 exit
@@ -26,7 +26,7 @@ exit
 
 이제 POD를 재실행 시켜보겠습니다.
 
-```
+``` bash
 kubectl delete pod hostpath-test && kubectl apply -f POD1.yaml
 ```
 
@@ -34,7 +34,7 @@ kubectl delete pod hostpath-test && kubectl apply -f POD1.yaml
 
 다시 container에 접근해서, 아까 저장한 /temp/index.html이 존재하는지 확인해보겠습니다.
 
-```
+``` bash
 kubectl exec -it hostpath-test -- bash
 cat /temp/index.html
 ```
@@ -45,7 +45,7 @@ cat /temp/index.html
 
 이제 host의 /etc/temp로 가서 해당 index.html이 있는지 확인해보겠습니다.
 
-```
+``` bash
 exit
 kubectl get pod -o wide
 ```
@@ -54,7 +54,7 @@ kubectl get pod -o wide
 
 해당 POD는 worker1에서 실행 중이므로, worker1의 /etc/opt를 확인해보겠습니다.
 
-```
+``` bash
 // worker node에서 진행
 cd /etc/opt
 cat index.html
@@ -66,7 +66,7 @@ container에서 설정한 값 그대로 저장된 것을 알 수 있습니다.
 
 이제 worker node에서 index.html을 변경해보겠습니다.
 
-```
+``` bash
 echo "Edit this file from host node" > /etc/opt/index.html
 ```
 
@@ -74,7 +74,7 @@ echo "Edit this file from host node" > /etc/opt/index.html
 
 다시 container에 접속해서 /temp/index.html을 확인해보겠습니다.
 
-```
+``` bash
 // master node에서 진행
 kubectl exec -it hostpath-test -- bash
 cat /temp/index.html
@@ -99,7 +99,7 @@ taint는 음식이나 물건의 quality를 떨어뜨리는 행위나 그 주체�
 
 즉 node에 taint 설정을 하면, 해당 taint에 대한 toleration이 있는 POD만 해당 node에서 실행이 가능합니다.
 
-```
+``` bash
 // master node에서 진행
 kubectl taint node $(cat /etc/hostname) node-role.kubernetes.io/master:NoSchedule-
 ```
@@ -109,8 +109,8 @@ kubectl taint node $(cat /etc/hostname) node-role.kubernetes.io/master:NoSchedul
 
 mongodb를 실행해보겠습니다.
 
-```
-cd week4/Volume/hostpath
+``` bash
+cd week4/Volume/2.hostpath
 
 kubectl apply -f ./mongo.yaml
 
@@ -123,7 +123,7 @@ kubectl get pod -o wide
 <img src="/images/volume/25.JPG">
 
 
-```
+``` bash
 kubectl exec -it mongo-0 -- mongo
 ```
 
@@ -131,7 +131,7 @@ kubectl exec -it mongo-0 -- mongo
 
 worker1에서 실행중인 mongodb POD에 접속했습니다.
 
-```
+``` bash
 use user
 
 db.user.insert({"node":"worker1"})
@@ -140,7 +140,7 @@ db.user.insert({"node":"worker1"})
 <img src="/images/volume/23.JPG">
 user라는 db namespace에 { "node":"worker1"}라는 데이터를 저장했습니다.
 
-```
+``` bash
 db.user.find({})
 
 ```
@@ -148,13 +148,13 @@ db.user.find({})
 
 
 user에 저장된 정보를 확인할 수 있습니다.
-```
+``` bash
 exit
 ```
 
 이제 이 POD가 worker node에서 master node로 옮겨갈 수 있도록 해보겠습니다.
 
-```
+``` bash
 //master node에서 진행
 kubectl cordon worker1
 
@@ -168,13 +168,13 @@ node와 worker1 중 worker1을 cordon했으니 앞으로 POD는 node에만 sched
 
 mongo POD를 재실행 시켜보겠습니다.
 
-```
+``` bash
 kubectl scale statefulset mongo --replicas=0 && kubectl scale statefulset mongo --replicas=1
 
 ```
 <img src="/images/volume/28.JPG">
 
-```
+``` bash
 kubectl get pod -o wide
 ```
 <img src="/images/volume/29.JPG">
@@ -183,17 +183,17 @@ kubectl get pod -o wide
 
 이 POD로 접속해서, 이전에 삽입한 {"node":"worker1"}이 존재하는지 확인해보겠습니다.
 
-```
+``` bash
 kubectl exec -it mongo-0 -- mongo
 ```
-```
+``` bash
 db.user.find()
 ```
 <img src="/images/volume/30.JPG">
 
 아무것도 저장되지 않은 모습입니다.
 
-```
+``` bash
 use user
 
 db.user.insert({"node":"master"})
@@ -207,14 +207,14 @@ exit
 
 worker1의 cordon을 해제하겠습니다.
 
-```
+``` bash
 kubectl uncordon worker1
 ```
 <img src="/images/volume/32.JPG">
 
 그리고 POD를 다시 재실행 시켜보겠습니다.
 
-```
+``` bash
 kubectl scale statefulset mongo --replicas=0 && kubectl scale statefulset mongo --replicas=1
 ```
 
@@ -224,7 +224,7 @@ kubectl scale statefulset mongo --replicas=0 && kubectl scale statefulset mongo 
 
 POD가 Running상태가 되면 접근해서 저장된 데이터를 확인해보겠습니다.
 
-```
+``` bash
 kubectl exec -it mongo-0 -- mongo
 
 use user
@@ -238,7 +238,7 @@ worker1에서 실행되는 mongo POD에는 {"node":"worker1"}이라는 데이터
 
 node에서 실행되는 mongo POD에서는 {"node":"master"}라는 데이터가 저장되어 있을 것입니다.
 
-```
+``` bash
 kubectl cordon worker1
 
 kubectl scale statefulset mongo --replicas=0 && kubectl scale statefulset mongo --replicas=1
@@ -250,7 +250,7 @@ kubectl get pod -o wide
 
 node에서 실행되는 mongo POD에 접근해보겠습니다.
 
-```
+``` bash
 kubectl exec -it mongo-0 -- mongo
 
 use user
@@ -262,4 +262,6 @@ db.user.find()
 hostpath를 사용하게 되면 실행중인 host node에 따라 volume이 바뀌어 data integrity를 보장할 수 없습니다.
 
 그래서, nodeSelector나 affinity를 활용해서 특정 node에서만 실행될 수 있도록 설정해야 합니다.
+
+nodeSelector와 affinity는 week4/POD/NODE directory를 참고하시기 바랍니다.
 

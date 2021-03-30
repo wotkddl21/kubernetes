@@ -19,8 +19,8 @@
 > 6. 3에서 수정한 내용이 유지되었는지 확인
 >
 > 
-```
-cd week4/Volume/emptydir
+``` bash
+cd week4/Volume/1.emptydir
 kubectl apply -f POD1.yaml
 ```
 >
@@ -36,7 +36,7 @@ kubectl apply -f POD1.yaml
 >
 > 그래서 mountPath를 다른 곳으로 설정한 뒤, 해당 파일이 유지되는지 확인해보겠습니다.
 > 
-```
+``` bash
 kubectl apply -f POD2.yaml
 ```
 > 
@@ -50,7 +50,7 @@ kubectl apply -f POD2.yaml
 >
 > 이 페이지를 수정해보겠습니다.
 >
-```
+``` bash
 kubectl exec -it test-temp -- bash
 echo "hi" > /usr/share/nginx/html/index.html
 ```
@@ -62,7 +62,7 @@ echo "hi" > /usr/share/nginx/html/index.html
 > 방금 수정한 내용이 반영된 모습입니다.
 >
 > 이 내용을 mount된 volume에도 적용해보겠습니다.
-```
+``` bash
 cat /usr/share/nginx/html/index.html > /temp/index.html
 cat /temp/index.html
 exit
@@ -72,7 +72,7 @@ exit
 > 
 > POD를 재실행 시킨 뒤 수정한 내용이 유지되는지 확인해보겠습니다.
 >
-```
+``` bash
 kubectl delete pod test-temp && kubectl apply -f POD2.yaml
 ```
 > 
@@ -80,7 +80,7 @@ kubectl delete pod test-temp && kubectl apply -f POD2.yaml
 > 
 > 다시 /temp/index.html이 있는지 확인해보겠습니다.
 > 
-```
+``` bash
 kubectl exec -it test-temp -- cat /temp/index.html
 ```
 > 

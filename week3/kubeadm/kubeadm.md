@@ -27,7 +27,7 @@
 
 ## 설치 시작 ( master node )
 >
-```
+``` bash
  chmod +x install.sh
  ./install.sh
 ```
@@ -35,11 +35,11 @@
 > 특정 version으로 kubernetes cluster를 구성하고 싶은 경우,
 >
 > ex) v1.18.0
-```
+``` bash
 apt-get install kubectl=1.18.0-00 kubelet=1.18.0-00 kubeadm=1.18.0-00 -y
 ```
 > 최신 버전으로 설치하고 싶은 경우
-```
+``` bash
 apt-get install kubectl kubelet kubeadm -y
 ```
 > <img src="/images/kubeadm/1.JPG">

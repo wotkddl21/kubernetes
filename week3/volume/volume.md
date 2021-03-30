@@ -6,7 +6,7 @@
 >   > mongo POD의 /data/db에 PV를 mount
 >   >
 >   > 해당 POD에 접근한 뒤, user db에 {data:"hi"}를 삽입
-```
+``` bash
 use user
 db.user.insert({data,"hi"})
 ```
@@ -19,7 +19,7 @@ db.user.insert({data,"hi"})
 >   > Statefulset을 삭제시킨 뒤, 다시 배포하여 {data:"hi"}가 있는지 확인
 
 > #### 초기 상태 구현
-```
+``` bash
 kubectl apply -f mongo-pv.yaml
 
 kubectl apply -f mongo.yaml
@@ -27,10 +27,10 @@ kubectl apply -f mongo.yaml
 >
 > < img src="/images/volume/1.JPG">
 >
-```
+``` bash
 kubectl exec -it mongo-0 -- mongo
 ```
-```
+``` bash
 use user
 
 db.user.insert({data:"hi"})

@@ -8,7 +8,7 @@
 > 
 > master와 worker node에서 week3/kubeadm/install.sh 를 실행시켜 필요한 파일들을 설치합니다.
 >
-```
+``` bash
 cd week3/kubeadm
 chmod +x install.sh
 ./install.sh
@@ -16,7 +16,7 @@ chmod +x install.sh
 > 
 > master node에서 kubeadm을 통해 cluster를 만들겠습니다.
 >
-```
+``` bash
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
 ```
@@ -24,7 +24,7 @@ kubeadm init --pod-network-cidr=10.244.0.0/16
 >
 > <img src="/images/POD/2.JPG">
 >
-```
+``` bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -32,7 +32,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 >
 > worker node에서, 빨간 box에 해당하는 명령어를 통해 cluster로 join 하겠습니다.
 >
-```
+``` bash
 kubeadm join 130.1.3.68:6443 --token 5lc4qq.1trdv4mmoqhsym3m \
     --discovery-token-ca-cert-hash sha256:13830002804e1fe84affb45c5617ac43350a8bf73587d50b2f0fc7d10f63f70a 
 ```
@@ -47,14 +47,14 @@ kubeadm join 130.1.3.68:6443 --token 5lc4qq.1trdv4mmoqhsym3m \
 >
 > 이제 master node에서, POD를 하나 실행시켜 보겠습니다.
 >
-```
+``` bash
 cd ../../week4/POD
 kubectl apply -f pod_test.yaml
 ```
 >
 > -o wide 옵션을 추가하면, cluster내부 ip와 실행중인 node 정보도 알 수 있습니다.
 >
-```
+``` bash
 kubectl get pod -o wide
 ```
 >
@@ -66,13 +66,13 @@ kubectl get pod -o wide
 >
 > 앞서 설명했듯 동적으로 ip를 할당받기 때문에 새롭게 POD를 실행하면 다른 ip를 가지게 됩니다.
 >
-```
+``` bash
 kubectl delete pod test
 ```
 >
 > <img src="/images/POD/6.JPG">
 >
-```
+``` bash
 kubectl apply -f pod_test.yaml
 
 kubectl get pod -o wide
