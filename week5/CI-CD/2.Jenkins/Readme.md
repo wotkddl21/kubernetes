@@ -179,6 +179,8 @@ jenkins를 실행중이던 web browser에서 다시 localhost:30303으로 접속
 
 <img src="/images/CICD/64.JPG">
 
+<img src="/images/CICD/65.JPG">
+
 
 
 
