@@ -120,16 +120,14 @@ Dockerfile은 docker명령어에서 build할 때 사용되는 파일입니다.
 ``` dockerfile
 FROM node:12.2.0-alpine
 
-# set working directory.
+# set working directory
 COPY . .
-
-WORKDIR /
-RUN npm install 
-
-WORKDIR /client
+WORKDIR /react-test/client
 RUN npm install
 
-WORKDIR /
+
+WORKDIR /react-test
+RUN npm install 
 # 앱 실행
 CMD ["npm", "run", "dev"]
 ```
@@ -144,9 +142,9 @@ WORKDIR은 다음 명령어가 실행될 위치를 지정합니다.
 
 이 Dockerfile의 흐름은, 현재 디렉토리의 모든 파일을 container로 옮긴 뒤,
 
-/:~# npm install
-/client:~# npm install
-/:~# npm run dev
+/react-test/client:~# npm install
+/react-test:~# npm install
+/react-test:~# npm run dev
 
 를 실행하는 것입니다.
 

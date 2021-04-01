@@ -196,67 +196,18 @@ podTemplate을 먼저 선언하고, node('builder')의 stage 3가지 ( Checkout,
 
 이제 POD를 배포하기 위한 yaml과 POD를 외부로 노출시키기 위한 yaml을 작성해야 합니다.
 
-Dockerfile, Jenkinsfile와 같은 위치에 저장하시면됩니다.
+제 project를 따라하셨다면, k8s 디렉토리에 deployment.yaml과 service.yaml을 사용하시면 됩니다.
 
-
-./k8s/deployment.yaml
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: react-test
-  labels: 
-    app: react-test
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: react-test
-  template:
-    metadata:
-      labels:
-        app: react-test
-    spec:
-      containers:
-      - name: react-container
-        image: wotkddl21/react-test
-        ports:
-        - containerPort: 3000
-        env:
-        - name: DATE
-          value: '2021-02-16'
-      imagePullSecrets:
-        - name: my-secret
-
-```
-
-./k8s/service.yaml
-``` yaml
-apiVersion: v1
-kind: Service
-metadata: 
-  name: react-service
-spec:
-  ports:
-    - name: "react-port"
-      port: 3000
-      protocol: TCP
-      targetPort: 3000
-      nodePort: 31111
-    - name: "backend-port"
-      targetPort: 31112
-      protocol: TCP
-      nodePort: 31112
-      port: 31112
-  selector:
-    app: react-test
-  type: NodePort
-```
+다른 project를 연동하신다면 제 yaml을 참고해서 작성하시면 됩니다.
 
 이제 테스트를 진행해보겠습니다.
 
 개발환경에서, git push를 진행해보겠습니다.
 
+```shell
+
+git push -u origin --tags
+```
 <img src="/images/CICD/107.jpg">
 
 <img src="/images/CICD/114.jpg">
@@ -277,13 +228,24 @@ console output 클릭
 
 이제 kubernetes cluster에서, cicd-space namespace의 POD와 service를 확인해보겠습니다.
 
+```shell
+kubectl get svc -n cicd-space
+kubectl get pod -n cicd-space
+```
 
+<img src="/images/CICD/119.jpg">
 
+<img src="/images/CICD/120.jpg">
 
+POD와 service가 정상적으로 동작하고 있습니다.
 
+이제 실제로 접속해보겠습니다.
 
+localhost:31111   ( localhost가 아닌, node의 ip로 접근하면 kakao 지도 api가 연동이 되지 않으니 localhost로 진행하셔야합니다. )
 
+kubernetes cluster의 모든 node에서 접근이 가능합니다.
 
+<img src="/images/CICD/118.jpg">
 
 
 

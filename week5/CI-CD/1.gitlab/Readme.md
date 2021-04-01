@@ -141,7 +141,7 @@ gitlab계정을 생성해서, 이 gitlab POD와 연동을 해야합니다.
 ``` shell
 // 개발환경에서 진행 ( 외부 node )
 
-git clone https://github.com/wotkddl21/capstone2_public.git
+git clone https://github.com/wotkddl21/cicd-test-k8s.git
 cd capstone2_public
 git remote rename origin old-origin
 git remote add origin http://< node ip>:30080/<gitlab username>/<gitlab project>.git
@@ -150,12 +150,6 @@ git push -u origin --tags
 ```
 
 <img src="/images/CICD/19.JPG">
-
-<img src="/images/CICD/21.JPG">
-
-<img src="/images/CICD/22.JPG">
-
-<img src="/images/CICD/23.JPG">
 
 push를 하게 되면 git credential을 입력해야합니다.
 
@@ -205,21 +199,4 @@ Projects를 통해 확인해보겠습니다.
 
 <img src="/images/CICD/34.JPG">
 
-<img src="/images/CICD/35.JPG">
-
-push를 한 번 진행해보겠습니다.
-
-<img src="/images/CICD/36.JPG">
-
-commit 2021-03-30이 써져있는 commit.txt를 만들었습니다.
-
-``` shell
-git add .
-git commit -m "from local dev"
-git push
-```
-<img src="/images/CICD/37.JPG">
-
-gitlab에 접속해서 새로고침을 하게 되면 아래와 같이 commit.txt를 확인할 수 있습니다.
-
-<img src="/images/CICD/37.JPG">
+<img src="/images/CICD/temp.jpg">

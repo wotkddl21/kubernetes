@@ -44,6 +44,8 @@ access token : RDyHsKik9mzByyQX7SBi
 
 Manage jenkins -> Configure System
 
+## 하루 뒤에 작성하느라, 재부팅을 했더니 IP가 130.1.3.79로 바뀌었습니다.
+
 <img src="/images/CICD/84.jpg">
 
 connection name : gitlab
