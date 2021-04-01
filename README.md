@@ -1,4 +1,6 @@
-# syds-paas1
+# PaaS 정리
+
+제가 개인적으로 kubernetes에 관한 공부를 한 내용을 정리할 저장소입니다.
 
 + ##  PaaS란 ( Platform as a Service )
 >   PaaS provider는, 사용자가 application 개발에 집중할 수 있도록, platform을 서비스합니다.
