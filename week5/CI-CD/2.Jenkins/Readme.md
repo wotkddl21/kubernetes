@@ -181,6 +181,33 @@ jenkins를 실행중이던 web browser에서 다시 localhost:30303으로 접속
 
 <img src="/images/CICD/65.JPG">
 
+Configure System을 누르고 스크롤을 최대한 내리면 Cloud라는 메뉴가 나타납니다.
+
+<img src="/images/CICD/66.jpg">
+
+a seperate configuration page를 클릭합니다.
+
+Add a new cloud를 누르면 kubernetes가 나타나니, 클릭하시고 kubernetes cloud details를 누르시면 됩니다.
+
+<img src="/images/CICD/67.JPG">
+
+<img src="/images/CICD/68.JPG">
+
+여기서 credential을 추가해서 Jenkins POD에서 kubectl을 사용할 수 있도록 설정할 것입니다.
+
+<img src="/images/CICD/69.JPG">
+
+<img src="/images/CICD/70.jpg">
+
+<img src="/images/CICD/71.jpg">
+
+모든 설정을 다 했다면 TEST connection을 진행합니다.
+
+<img src="/images/CICD/72.jpg">
+
+이상으로, jenkins POD에서 CD를 위한 cluster접근과 kubectl 사용권한에 대한 설정을 마무리했습니다.
+
+내용이 너무 길어져, gitlab 연동은 다음 디렉토리 3.sync-jenkins-gitlab 에서 진행하겠습니다.
 
 
 
