@@ -8,7 +8,7 @@
 >
 > kubectl get pod
 > 
-> <img src="/images/17.JPG">
+> <img src="/images/minikube/17.JPG">
 >
 > 위와 같은 출력이 나오면, 성공적으로 POD를 실행한 것 입니다.
 >
@@ -18,7 +18,7 @@
  
  curl localhost:3000
 ``` 
-> <img src="/images/18.JPG">
+> <img src="/images/minikube/18.JPG">
 > 
 > 위와 같은 출력이 나온다면 POD를 생성하고, 접근하는데 성공한 것입니다.
 > 
@@ -26,7 +26,7 @@
 > 
 > POD의 cluster ip는, kubectl get pod -o wide 를 통해 알아낼 수 있습니다.
 > 
-> <img src="/images/20.JPG">
+> <img src="/images/minikube/20.JPG">
 > 
 > 이 경우, POD는 172.17.0.3의 ip를 가지고 있습니다.
 >
@@ -34,7 +34,7 @@
 ```  bash
  curl $(kubectl get pod -o wide | grep -i pod1 | awk '{ print $6 }'):3000
 ``` 
-> <img src="/images/19.JPG">
+> <img src="/images/minikube/19.JPG">
 >
 > 이 pod를 삭제 후 다시 실행시켜보겠습니다.
 ``` bash
@@ -42,7 +42,7 @@
  
  kubectl get pod -o wide
 ```
-> <img src="/images/21.JPG">
+> <img src="/images/minikube/21.JPG">
 > 
 > 다시 POD의 ip를 확인해보면, 이전과 달라진 것을 알 수 있습니다.
 > 
@@ -56,7 +56,7 @@
 > 
 > 그래서 고정적인 ip를 갖는 Service를 POD의 앞단에 붙여서 사용합니다.
 > 
-> <img src="/images/22.jpg">
+> <img src="/images/minikube/22.jpg">
 > 
 > 다음 명령어를 실행하시면, 좀 전에 생성한 POD와 연결되는 service가 만들어집니다.
 ```  bash
@@ -64,7 +64,7 @@
 
  kubectl get service -o wide
 ``` 
-> <img src="/images/23.JPG">
+> <img src="/images/minikube/23.JPG">
 > 
 > 접근하고자 하는 service의 ip는 10.96.9.106입니다. 이는 POD가 새로 생성되어도 그대로 유지됩니다.
 > 
@@ -72,7 +72,7 @@
 ```  bash
  curl $(kubectl get service -o wide | grep -i pod1 | awk '{ print $3 }'):3000
 ``` 
-> <img src="/images/24.JPG">
+> <img src="/images/minikube/24.JPG">
 > 
 > service의 형태는 다양한데, 이번에 생성한 Nodeport의 경우, 외부에서 node의 ip와 30001번 port 통해서도 접근이 가능합니다.
 > 
@@ -80,7 +80,7 @@
 ```  bash
  ifconfig | grep "inet "
 ``` 
-> <img src="/images/25.JPG">
+> <img src="/images/minikube/25.JPG">
 >
 > 저의 경우, network interface가 enp0s3으로 설정되어 있고, 이 ip주소는 130.1.3.114입니다.
 >
@@ -88,7 +88,7 @@
 > 
 > 130.1.3.114:30001
 > 
-> <img src="/images/26.JPG">
+> <img src="/images/minikube/26.JPG">
 > 
 > 외부에서도 접속이 가능합니다.
 >

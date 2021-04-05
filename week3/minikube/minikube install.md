@@ -62,7 +62,7 @@
  ./install.sh
 ``` 
 >
-> <img src="/images/minikube/4.JPG" >
+> <img src="/images/minikube/24.JPG" >
 > 
 > 위와 같은 출력이 나온다면 minikube와 그에 필요한 것들을 성공적으로 설치한 것입니다.
 >
