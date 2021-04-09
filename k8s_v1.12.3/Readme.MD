@@ -1,6 +1,8 @@
 제가 담당하는 cluster를 관리하기 위한 script와 python 파일들을 올려놓을 공간입니다.
 
-|실행파일|참조 파일|비고
+각 code에 대한 간단한 설명입니다.
+
+|실행파일|참조 파일|비고|
 |:-----|:-----|:-----|
 |get_now.sh	|없음|현재 k8s resource 저장|
 |get_pod_list_within_specific_time.py	|get_now.sh,<prd or stg>/current_resource/now_pod.txt|현재 POD의 정보와 backup_latest/에 저장된 정보 비교|
@@ -11,3 +13,12 @@
 |hpa.sh	|./hpa/hpa.sh <prd or stg>|	참조 deployment가 없는 hpa 목록조회|
 |hpa/hpa.py|	hpa/<prd or stg>/now_<deployment or hpa>.txt|참조 deployment가 없는 hpa 목록조회|	|list_affinity.sh|env.sh|Deployment의 affinity 조회|
 |pod.sh|env.sh|현재 실행중인 POD조회|
+
+
+|환경 변수 파일|
+|:-----|
+|env.sh|
+|resource_list/resource1.list|
+|resource_list/resource2.list|
+|resource_list/resource3.list|
+|resource_list/resource4.list|
