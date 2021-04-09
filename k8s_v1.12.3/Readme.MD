@@ -52,15 +52,13 @@ POD의 status가 not Running 인 경우 붉은 줄로 표시  |
 |참조 파일| env.sh, resource_list/resource*.list |
 |:----|:----|
 |실행 방법|``` ./resource.sh <prd or stg>  ```|
-|실행 과정| resource_list/resource*.list에 저장된 kubernetes resource를 kubectl get, describe 로부터 값을 받아오고 이를 $1/backup_$time , $1/backup_latest 에 저장 <br>
-p.s. $time : 현재 날짜 (ex 2021-04-06) |
+|실행 과정| resource_list/resource*.list에 저장된 kubernetes resource를 kubectl get, describe 로부터 값을 받아오고 이를 $1/backup_$time , $1/backup_latest 에 저장 <br>p.s. $time : 현재 날짜 (ex 2021-04-06) |
 |실행 예시| ``` ./resource.sh prd  ```<br> <img src="/images/cluster/script7.jpg"><br> <img src="/images/cluster/script8.jpg">|
 |output | $1/backup_latest/* , $1/backup_$time/* |
 
 ### 4. check_total_resource.py
 
-|참조 파일|env.sh, get_now.sh, <br>
-<prd or stg>/current_resource/now_*.txt, <prd or stg>/backup_latest/get/* |
+|참조 파일|env.sh, get_now.sh, <br><prd or stg>/current_resource/now_*.txt, <prd or stg>/backup_latest/get/* |
 |:----|:----|
 |실행 방법|``` python check_total_resource.py <prd or stg> ```|
 |실행 과정|※ 장애 발생 및 작업 전후 Kubernetes resource 상태 비교를 위한 코드<br>get_now.sh 를 호출해서 $1/current_resource/now_*.txt를 생성<br>resource.sh를 통해 저장해 놓은 $1/backup_latest/get/*의 값과 비교<br>( now_*.txt의 목록은 resource/resource*.list 에서 확인 가능 )|
