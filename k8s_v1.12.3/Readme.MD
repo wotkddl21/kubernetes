@@ -29,8 +29,10 @@
 ex) ./test.sh hello world  --> 이 경우, $0 : test.sh, $1 : hello , $2 : world
 
 ### 1. get_now.sh
-|:----|:----|
+
 |참조 파일| 없음|
+|:----|:----|
+
 
 
 
