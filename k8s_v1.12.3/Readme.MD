@@ -101,7 +101,7 @@ replica=0 작업 진행 후, restore.sh 통해 저장된 값 이용하여 기존
 |:----|:----|
 |실행 방법|``` python ./hpa/hpa.py < prd or stg >  ```|
 |실행 과정| 단독으로 실행하지 말고, hpa.sh를 통해 실행시키는 것이 올바른 방법 <br> hpa/$1/now_hpa.txt와 hpa/$1/now_deployment.txt를 비교 <br> hpa들 중 현재 클러스터 내에 존재하지 않는 deployment를 reference로 사용하는 것들을 출력 |
-|실행 예시| 현재 Deployment와 HPA의 상태는 다음과 같다. <img src="images/cluster/script4.jpg"><br>test와 unknown hpa는 reference deployment가 현재 클러스터에 존재하지 않는다.<br>``` python ./hpa/hpa.py prd  ```<br> <img src="/images/cluster/script3.jpg">|
+|실행 예시| 현재 Deployment와 HPA의 상태는 다음과 같다. <img src="/images/cluster/script4.jpg"><br>test와 unknown hpa는 reference deployment가 현재 클러스터에 존재하지 않는다.<br>``` python ./hpa/hpa.py prd  ```<br> <img src="/images/cluster/script3.jpg">|
 |output | 현재 클러스터 내에 존재하지 않는 deployment를 reference로 사용하는 hpa들을 출력 |
 
 ### 9. list_affinity.sh
