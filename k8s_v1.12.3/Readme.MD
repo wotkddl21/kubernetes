@@ -37,6 +37,88 @@ ex) ./test.sh hello world  --> 이 경우, $0 : test.sh, $1 : hello , $2 : world
 |실행 예시| ``` ./get_now.sh pod prd ``` <img src="/images/cluster/script5.jpg">|
 |output | $2/current_resource/now_$1.txt|
 
+### 2. get_pod_list_within_specific_time.py
+
+|참조 파일| get_now.sh, <prd or stg>/current_resource/now_pod.txt |
+|:----|:----|
+|실행 방법|``` python get_pod_list_within_specific_time.py < prd or stg > < time >   ```|
+|실행 과정| ※ 장애 발생 후 (장애 해결 이후) pod 상태 비교를 위한 파일 
+get_now.sh 를 호출해서 $1/current_resource/now_*.txt를 생성 
+$1 클러스터에서 $2 (min) 이전에 실행되었거나 not RUNNING POD출력 |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### 3. resource.sh
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### 4. check_total_resource.py
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### 5. backup.sh
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### 6. restore.sh
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### hpa.sh
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### hpa/hpa.py
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### list_affinity.sh
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
+
+### pod.sh
+
+|참조 파일| |
+|:----|:----|
+|실행 방법|```   ```|
+|실행 과정| |
+|실행 예시| ```  ``` <img src="/images/cluster/script5.jpg">|
+|output | |
 
 
 
