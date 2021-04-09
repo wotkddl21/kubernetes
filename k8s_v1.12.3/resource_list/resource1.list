@@ -1,0 +1,7 @@
+clusterrolebindings
+clusterroles
+componentstatuses
+namespaces
+nodes
+persistentvolumes
+priorityclasses

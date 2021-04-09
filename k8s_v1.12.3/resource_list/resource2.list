@@ -1,0 +1,15 @@
+controllerrevisions
+daemonsets
+deployments
+endpoints
+horizontalpodautoscalers
+ingresses
+persistentvolumeclaims
+pods
+replicasets
+rolebindings
+roles
+secrets
+serviceaccounts
+services
+statefulsets

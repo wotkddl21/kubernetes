@@ -22,3 +22,14 @@
 |resource_list/resource2.list|
 |resource_list/resource3.list|
 |resource_list/resource4.list|
+
+
+※ 참고 사항 : shell script의 경우, argument를 $로 표시
+
+ex) ./test.sh hello world  --> 이 경우, $0 : test.sh, $1 : hello , $2 : world
+
+### 1. get_now.sh
+
+
+
+
