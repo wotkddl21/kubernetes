@@ -35,6 +35,8 @@ ex) ./test.sh hello world  --> 이 경우, $0 : test.sh, $1 : hello , $2 : world
 |실행 방법|``` ./get_now.sh {resource} {prd or stg}  ```|
 |실행 과정|$1를 $2 클러스터에서 kubectl get을 통해 얻어낸 뒤, $2/current_resource/noe_$1.txt로 저장|
 |실행 예시| ``` ./get_now.sh pod prd ``` <img src="/images/cluster/script5.jpg">|
+|output | $2/current_resource/now_$1.txt|
+
 
 
 
