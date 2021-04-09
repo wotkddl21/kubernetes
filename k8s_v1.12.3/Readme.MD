@@ -1,6 +1,4 @@
-제가 담당하는 cluster를 관리하기 위한 script와 python 파일들을 올려놓을 공간입니다.
-
-각 code에 대한 간단한 설명입니다.
+제가 담당하는 cluster를 관리하기 위한 /bin/bash script와 python 파일들을 올려놓을 공간입니다.
 
 ### 실행 파일 목록
 
