@@ -16,7 +16,6 @@ master node : 3대, worker node 1대로 구성할 예정입니다.
 
 master node들은 아래와 같은 구조로 구축할 예정입니다.
 
-<img src="images/multimaster/1.jpg>">
 <img src="/images/multimaster/1.jpg">
 
 비어있는 ip인 130.1.3.200를 vip로 사용할 것 입니다.
@@ -27,7 +26,7 @@ master node들은 아래와 같은 구조로 구축할 예정입니다.
 chmod +x ./install.sh
 ./install.sh
 ```
-<img src="/images/multimaster/2.jpg>">
+<img src="/images/multimaster/2.jpg">
 
 master 3대 중 1대는 NMASTER, 나머지 2대는 BACKUP으로 설정합니다.
 
