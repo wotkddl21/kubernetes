@@ -141,3 +141,10 @@ kubectl get node
 
 
 
+
+
+### 추가사항
+
+nf_conntrack_ipv4와 nf_conntrack_ipv6가 nf_conntrack로 통합되면서, kubespray/roles/kubernetes/node/tasks/main.yaml의 Modprobe, Persist ip_vs modules를 수정해야한다.
+
+nf_conntrack_ipv4 값을 nf_conntrack로 변경해야한다.
