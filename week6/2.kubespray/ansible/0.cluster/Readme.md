@@ -59,7 +59,7 @@ calico_rr
 
 ```
 
-## kubeernetes 설치
+## kubernetes 설치
 
 ansible-playbook -i ./inventory/mycluster/inventory.ini cluster.yml
 
