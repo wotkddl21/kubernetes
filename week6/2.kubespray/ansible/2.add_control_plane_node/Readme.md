@@ -12,7 +12,6 @@ worker1 : 192.168.0.24 ubuntu 18.04
 
 worker2 : 192.168.0.27
 
-<img src="/images/kubespray/add_node/1.jpg">
 
 ## 신규 node 정보
 
@@ -135,6 +134,19 @@ calico_rr
 ### ansible-playbook 실행
 
 ansible-playbook -i ./inventory/mycluster/inventory.ini cluster.yml
+
+<img src="/images/kubespray/add_control_plane_node/1.jpg">
+
+### restart kube-system/nginx-proxy
+
+worker node의 kube-system/nginx-proxy를 재실행 해줘야한다.
+
+config값을 kubespray에서 수정해주지만, 재시작해야 반영된다.
+
+``` bash
+docker ps | grep k8s_nginx-proxy_nginx-proxy | awk '{print $1}' | xargs docker restart
+```
+<img src="/images/kubespray/add_control_plane_node/2.jpg">
 
 
 
