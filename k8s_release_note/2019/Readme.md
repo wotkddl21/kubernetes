@@ -151,3 +151,46 @@ spec:
 ```
 > 위와 같이 spec.csi.driver에 csi plugin 을 지정하고, spec.csi.volumeHandle에 existingVolumeName을 지정하면 기존에 떠있던 volume들을 csi에 포함되도록 할 수 있다.
 ### 1.2.8	Attaching and Mounting
+
+> CSI volume에 bound된 pvc는 어느 POD에서나 참조할 수 있다.
+> 
+> 예시
+> 
+``` yaml
+kind: Pod
+apiVersion: v1
+metadata:
+  name: my-pod
+spec:
+  containers:
+    - name: my-frontend
+      image: nginx
+      volumeMounts:
+      - mountPath: "/var/www/html"
+        name: my-csi-volume
+  volumes:
+    - name: my-csi-volume
+      persistentVolumeClaim:
+        claimName: my-request-for-storage
+```
+> 
+> CSI volume을 사용하는 POD가 스케줄링되면, k8s는 해당 POD가 volume을 사용할 수 있도록 외부 CSI plugin을 통해 적절한 operation을 진행한다.
+> 
+> 
+### 1.2.9 How to write a CSI driver?
+
+> 첫 번째 원칙은 CSI driver는 k8s에 대해 무관해야한다.
+>
+> 그래야 Storage vendor들이 k8s의 특징(버전별)에 상관없이 배포할 수 있기 때문이다.
+>
+> 다양한 side car와 함께 CSI driver를 만들게 되는데, 자세한 내용은
+> https://kubernetes-csi.github.io/ 를 참고하자.
+
+### 1.2.10 GA의 한계
+
+> 현재 GA상태의 CSI를 사용하면, 임시 local volume은 PVC를 생성해야 사용할 수 있다.
+
+
+
+## 1.3 Update on Volume Snapshot Alpha for k8s
+
