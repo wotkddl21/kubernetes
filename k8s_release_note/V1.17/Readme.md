@@ -203,6 +203,3 @@
 > subPathExpr에 $(MY_POD_NAME)을 사용하면 실제 shared-folder가 mount되는 위치는 /cache/$(MY_POD_NAME)이 된다.
 
 
-
-## 2.7	Defaulting of Custom Resources
-
