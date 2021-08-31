@@ -103,11 +103,11 @@ podTemplate을 먼저 선언하고, node('builder')의 stage 3가지 ( Checkout,
 > > 
 > > 신규 tag가 추가될 때마다 이 가져올 image tag를 수정하는 것은 비효율적입니다.
 > > 
-> > 그래서 latest는 docker에서 제공해주는 기능 중 하나로, pull명령어를 실행하는 순간 가장 최근 버전의 image를 > 가져옵니다.
+> > 그래서 latest는 docker에서 제공해주는 기능 중 하나로, pull명령어를 실행하는 순간 가장 최근 버전의 image를  가져옵니다.
 > > 
-> > 이 image로 container를 실행하명 kubectl 명령어를 사용할 수 있습니다.
+> > 이 image로 container를 실행하면 container내에서 kubectl 명령어를 사용할 수 있습니다.
 > > 
-> > docker image를 push하고, kubernetes cluster에 배포할 때 사용됩니다.
+> > docker image를 pull하고, kubernetes cluster에 배포할 때 사용됩니다.
 > > 
 > > 
 > > 마지막으로 volume이 mount될 위치를 지정했습니다.
@@ -138,7 +138,7 @@ podTemplate을 먼저 선언하고, node('builder')의 stage 3가지 ( Checkout,
 > > > 
 > > > 이 credential을 통해 이후 docker push를 위한 권한 인증을 진행하게 됩니다.
 > > > 
-> > > 이 과정이 끝나면, 사용자가 push한 소스코드가 docker image가 되어 registry로 push됩니다.
+> > > 이 과정이 끝나면, 사용자가 build한 소스코드가 docker image가 되어 registry로 push됩니다.
 > > > 
 > > 3. Run kubectl
 > > > 
@@ -150,7 +150,7 @@ podTemplate을 먼저 선언하고, node('builder')의 stage 3가지 ( Checkout,
 > > > > 
 > > > > kubectl을 통해서, POD를 배포할 때 container image가 필요합니다.
 > > > > 
-> > > > 이 image가 local에 존재한다면 무리가 없지만, 지금 상황은 2. Docker build 에서 hub로 image를 push한 > > > 상태입니다.
+> > > > 이 image가 local에 존재한다면 무리가 없지만, 지금 상황은 2. Docker build 에서 image를 docker hub로 push한 상태입니다.
 > > > > 
 > > > > 이를 가져오기 위해서 docker username, password를 통한 인증과정을 거쳐야합니다.
 > > > > 
@@ -171,7 +171,7 @@ podTemplate을 먼저 선언하고, node('builder')의 stage 3가지 ( Checkout,
 > > > > >
 > > > > > 앞서 kubectl image에 latest를 붙인 것처럼, 항상 최신 tag가 붙은 image를 사용합니다.
 > > > > > 
-> > > > > 이렇게 하고 싶다면, 2. docker build단계에서, tag부분을 build할 때마다 바뀌도록 설정해야 합니다. ( 보통 date를 사용하거나, 기존 version에서 +1 된 숫자를 사용합니다. )
+> > > > > 이렇게 하고 싶다면, 2. docker build단계에서, docker image의 tag부분을 build할 때마다 바뀌도록 설정해야 합니다. ( 그래서 보통 date를 사용하거나, 기존 version에서 +1 된 숫자를 사용합니다. )
 > > > > > 
 > > > > > 
 > > > > ###### 2. edit yaml
@@ -182,11 +182,11 @@ podTemplate을 먼저 선언하고, node('builder')의 stage 3가지 ( Checkout,
 > > > > > 
 > > > > > 2. docker build를 보면 docker image의 tag값을 변경시키지 않고 계속해서 덮어 쓰는 방식으로 push를 진행합니다.
 > > > > > 
-> > > > > yaml파일의 변화가 없다면 image가 변경되어도, 애초에 config unchanged라는 출력과 함께 아무런 변화도 일어나지 않습니다.
+> > > > > kubectl apply -f some.yaml을 실행했을 때, some.yaml파일의 변화가 없다면 image가 변경되어도, config unchanged라는 출력과 함께 아무런 변화도 일어나지 않습니다.
 > > > > > 
 > > > > > 그래서 yaml파일에 환경변수를 추가했고, 이 환경변수에 jenkinsfile이 실행되는 시간을 기록했습니다.
 > > > > > 
-> > > > > 그러면 사용자가 code push를 하고 pipeline이 실행되고 이 때의 시간이 yaml파일에 기록되면서 항상 재배포가 이루어집니다.
+> > > > > 그러면 사용자가 code push를 하고 pipeline이 실행될 때의 시간이 yaml파일에 기록되면서 항상 재배포가 이루어집니다.
 > > > > > 
 > > > > > sed라는 linux 명령어를 활용해서, env의 value부분을 ${DATE}로 변경하는 모습입니다.
 > > > > > 
@@ -241,7 +241,7 @@ POD와 service가 정상적으로 동작하고 있습니다.
 
 이제 실제로 접속해보겠습니다.
 
-localhost:31111   ( localhost가 아닌, node의 ip로 접근하면 kakao 지도 api가 연동이 되지 않으니 localhost로 진행하셔야합니다. )
+localhost:31111   ( localhost가 아닌, node의 ip로 접근하면 kakao 지도 api가 연동이 되지 않으니 localhost로 진행하셔야합니다. 카카오 지도 api는 도메인 기반으로 연동됩니다. )
 
 kubernetes cluster의 모든 node에서 접근이 가능합니다.
 
