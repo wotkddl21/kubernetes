@@ -49,9 +49,9 @@
 ```  bash
  apt-get install git -y
  
- git clone https://github.com/jymun/syds-paas1.git
+ git clone https://github.com/wotkddl21/kubernetes.git
  
- cd ./syds-paas1/week3
+ cd ./kubernetes/week3
 ``` 
 > // install.sh에 실행권한 부여
 ```  bash
