@@ -3,7 +3,7 @@
 
 ### POD 예제
 >
-> 현재 디렉토리는 syds-paas1/week3 입니다.
+> 현재 디렉토리는 kubernetes/week3 입니다.
 >
 > kubectl apply -f ./pod.yaml
 >
