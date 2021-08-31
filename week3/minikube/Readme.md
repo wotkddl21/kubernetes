@@ -1,4 +1,5 @@
 ## 앞서 minikube로 구축한 kubernetes cluster에서 간단한 test를 진행하겠습니다.
+   minikube.md 참고
 
 ### POD 예제
 >
