@@ -1,4 +1,4 @@
-## minikube를 통해, 빠르게 kubernetes cluster를 구성하는 방법에 대해 알아봤습니다.
+## minikube를 통해, 빠르게 kubernetes cluster를 구성하는 방법에 대해 알아보겠습니다.
 
 ### node spec
 > virtualbox
@@ -51,7 +51,7 @@
  
  git clone https://github.com/wotkddl21/kubernetes.git
  
- cd ./kubernetes/week3
+ cd ./kubernetes/week3/minikube
 ``` 
 > // install.sh에 실행권한 부여
 ```  bash
